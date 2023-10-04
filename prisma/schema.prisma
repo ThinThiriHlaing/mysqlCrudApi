@@ -1,0 +1,33 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model company_members {
+  id     Int    @id @default(autoincrement())
+  name   String @db.VarChar(30)
+  age    Int
+  gender String @db.VarChar(10)
+  city   String @db.VarChar(30)
+}
+
+/// This table contains check constraints and requires additional setup for migrations. Visit https://pris.ly/d/check-constraints for more info.
+model family_members {
+  id     Int    @unique(map: "id") @default(autoincrement())
+  name   String @db.VarChar(30)
+  age    Int    @default(22)
+  gender String @default("female") @db.VarChar(10)
+  city   String @db.Text
+}
+
+/// This table contains check constraints and requires additional setup for migrations. Visit https://pris.ly/d/check-constraints for more info.
+model person {
+  id     Int    @unique(map: "id") @default(autoincrement())
+  name   String @db.VarChar(30)
+  age    Int    @default(20)
+  gender String @default("femal") @db.VarChar(10)
+}
